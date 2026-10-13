@@ -43,14 +43,14 @@ To evaluate zero-shot diagnosis, all methods are trained and validated only on n
 ### Training Protocol
 
 - CPS-MoE consists of three submodels for detection, identification, and localization, which are trained separately.
-- Each submodel is trained with five random seeds (`[seed list]`), and all reported results are averaged over the five seeds.
+- Each submodel is trained with five random seeds, and all reported results are averaged over the five seeds.
 - Under the same seed, each submodel shares the parameters of its global expert network across the IEEE 34-node and IEEE 123-node feeders, whereas the specialized experts and decision thresholds are determined separately for each feeder.
 - Model outputs are calibrated by temperature scaling on the validation set, and the decision thresholds are selected by maximizing the validation F1-score (see Section IV-C of the paper).
 - All three submodels are optimized with AdamW.
 
 ### Implementation
 
-All neural networks, including the baselines, are implemented in PyTorch (`[version]`).
+All neural networks, including the baselines, are implemented in PyTorch 2.0.1.
 
 ### Hardware Requirements
 
