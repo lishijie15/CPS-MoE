@@ -36,7 +36,7 @@ To address this,
 
 ### Data Split
 
-Each annual scenario (8,784 hourly time steps in 2016) is split by month into training, validation, and test sets at a ratio of 7:2:3.
+Each annual scenario (8,784 hourly time steps in 2016) is split by calendar month: 7 months for training, 2 months for validation, and 3 months for testing.
 
 To evaluate zero-shot diagnosis, all methods are trained and validated only on normal operation and the five single events (PV, EV, FDIA, Worm, and DoS). The six compound events (PV+EV, PV+FDIA, EV+DoS, FDIA+Worm, Worm+DoS, and PV+FDIA+Worm) are used for testing only.
 
@@ -54,13 +54,6 @@ All neural networks, including the baselines, are implemented in PyTorch (`[vers
 
 ### Hardware Requirements
 
-Peak GPU memory during inference at a batch size of 512:
-
-| Model | IEEE 34-node | IEEE 123-node |
-|---|---|---|
-| CPS-MoE | ~4.2 GiB | ~4.2 GiB |
-| TESTAM (largest among baselines) | ~3.3 GiB | ~10.8 GiB |
-
-- CPS-MoE inference fits on a single GPU with 8 GB of memory.
-- To run inference for all baselines at the same batch size, a GPU with at least 12 GB of memory is recommended.
+- A single GPU with 8 GB of memory is sufficient for CPS-MoE inference, and a GPU with at least 12 GB of memory is recommended for running all baselines at a batch size of 512. Detailed memory usage is reported in the efficiency analysis of the paper.
+- Training requires more memory than inference, since intermediate activations are stored for backpropagation. On GPUs with less memory, reduce the batch size.
 - Training requires more memory than inference, since intermediate activations are stored for backpropagation. On GPUs with less memory, reduce the batch size.
