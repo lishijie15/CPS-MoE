@@ -23,7 +23,7 @@ With the increasing penetration of photovoltaics and electric vehicles, modern p
 
 To evaluate zero-shot diagnosis, test scenarios must reflect how physical events alter the operating states of the PDS and how cyber events distort the telemetry received by the control center, while retaining the labels and affected nodes of each constituent event. CPCM achieves this by coupling each PDS with its RTU-based communication system (CS) (Section III of the paper).
 
-- **PDS.** PV units and EV charging stations (EVCSs) are integrated into the IEEE 34 node and IEEE 123 node test feeders [[1]](#ref1), both with unbalanced three-phase electrical models. The load, PV, and charging data are obtained from [[2]](#ref2) and span the year 2016 at an hourly resolution [[3]](#ref3)-[[6]](#ref6), comprising 8,784 time steps. The PV and charging profiles are normalized by the source PV rated power and charging reference power and rescaled at each node by the rated PV power and the EVCS power limit, respectively, while preserving their temporal patterns. The load, PV, and charging demand are then solved by an unbalanced three-phase power flow, which converges throughout the annual time series.
+- **PDS.** PV units and EV charging stations (EVCSs) are integrated into the IEEE 34 node and IEEE 123 node test feeders [[1]](#ref1), both with unbalanced three-phase electrical models. The load, PV, and charging data are obtained from [[2]](#ref2) and span the year 2016 at an hourly resolution [[3]](#ref3)–[[6]](#ref6), comprising 8,784 time steps. The PV and charging profiles are normalized by the source PV rated power and charging reference power and rescaled at each node by the rated PV power and the EVCS power limit, respectively, while preserving their temporal patterns. The load, PV, and charging demand are then solved by an unbalanced three-phase power flow, which converges throughout the annual time series.
 - **RTU zones.** Following the multi-area partitioning used in distribution system monitoring [[7]](#ref7), [[8]](#ref8), each test feeder is divided along its topology into contiguous and nonoverlapping zones (Fig. 4 of the paper). Each zone is monitored by one RTU that collects all telemetry within the zone, so every node and its telemetry channels belong to exactly one RTU.
 - **Communication.** The active and reactive power measurements of loads, PV units, and EVCSs are organized into telemetry channels and assigned to nodes and RTUs. From the received values, source timestamps, and sequence information of each channel, five features are computed for each RTU at each time step, namely the update ratio, timeout ratio, mean data age, maximum data age, and sequence advancement ratio. Communication is lossless in normal operation, so all timeouts and delays arise from cyber events.
 - **Ground truth.** The physical states obtained from the power flow are stored separately from the received telemetry, so that the effects of physical and cyber events can be distinguished.
@@ -78,6 +78,7 @@ Each sample is a window of $`T=12`$ time steps that ends at the diagnosed time s
 | Optimizer | AdamW |
 | Batch size | 192 |
 | Epochs | Up to 1000, with early stopping on the validation set (patience of 20 epochs) |
+| Decision thresholds | Selected on the validation set and fixed before testing |
 
 The key hyperparameters are listed below (Table I of the paper).
 
@@ -89,7 +90,6 @@ The key hyperparameters are listed below (Table I of the paper).
 | Batch size | 192 | $`\lambda_{\mathrm{con}}`$ | 0.06 | $`\beta^{\mathrm{per}}`$ | 0.2 |
 | Epochs | 1000 | $`\lambda_{\mathrm{rec}}`$ | 0.08 | $`\tau^{\mathrm{ref}}`$ | 0.15 |
 | Patience | 20 | $`\tau^{\mathrm{age}}`$ | 2 | $`\tau^{\mathrm{def}}`$ | 0.15 |
-| Decision thresholds | Selected on the validation set and fixed before testing |
 
 ### Evaluation
 
