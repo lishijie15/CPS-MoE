@@ -23,8 +23,8 @@ With the increasing penetration of photovoltaics and electric vehicles, modern p
 
 To evaluate zero-shot diagnosis, test scenarios must reflect how physical events alter the operating states of the PDS and how cyber events distort the telemetry received by the control center, while retaining the labels and affected nodes of each constituent event. CPCM achieves this by coupling each PDS with its RTU-based communication system (CS) (Section III of the paper).
 
-- **PDS.** PV units and EV charging stations (EVCSs) are integrated into the IEEE 34 node and IEEE 123 node test feeders [1], both with unbalanced three-phase electrical models. The load, PV, and charging data are obtained from [2] and span the year 2016 at an hourly resolution [3]–[6], comprising 8,784 time steps. The PV and charging profiles are normalized by the source PV rated power and charging reference power and rescaled at each node by the rated PV power and the EVCS power limit, respectively, while preserving their temporal patterns. The load, PV, and charging demand are then solved by an unbalanced three-phase power flow, which converges throughout the annual time series.
-- **RTU zones.** Following the multi-area partitioning used in distribution system monitoring [7], [8], each test feeder is divided along its topology into contiguous and nonoverlapping zones (dashed boxes in the figure below). Each zone is monitored by one RTU that collects all telemetry within the zone, so every node and its telemetry channels belong to exactly one RTU.
+- **PDS.** PV units and EV charging stations (EVCSs) are integrated into the IEEE 34 node and IEEE 123 node test feeders [[1]](#ref1), both with unbalanced three-phase electrical models. The load, PV, and charging data are obtained from [[2]](#ref2) and span the year 2016 at an hourly resolution [[3]](#ref3)-[[6]](#ref6), comprising 8,784 time steps. The PV and charging profiles are normalized by the source PV rated power and charging reference power and rescaled at each node by the rated PV power and the EVCS power limit, respectively, while preserving their temporal patterns. The load, PV, and charging demand are then solved by an unbalanced three-phase power flow, which converges throughout the annual time series.
+- **RTU zones.** Following the multi-area partitioning used in distribution system monitoring [[7]](#ref7), [[8]](#ref8), each test feeder is divided along its topology into contiguous and nonoverlapping zones (Fig. 4 of the paper). Each zone is monitored by one RTU that collects all telemetry within the zone, so every node and its telemetry channels belong to exactly one RTU.
 - **Communication.** The active and reactive power measurements of loads, PV units, and EVCSs are organized into telemetry channels and assigned to nodes and RTUs. From the received values, source timestamps, and sequence information of each channel, five features are computed for each RTU at each time step, namely the update ratio, timeout ratio, mean data age, maximum data age, and sequence advancement ratio. Communication is lossless in normal operation, so all timeouts and delays arise from cyber events.
 - **Ground truth.** The physical states obtained from the power flow are stored separately from the received telemetry, so that the effects of physical and cyber events can be distinguished.
 
@@ -33,7 +33,7 @@ To evaluate zero-shot diagnosis, test scenarios must reflect how physical events
 | IEEE 34 node | 34 | 4 (4, 9, 24, 31) | 2 (26, 31) | 10 | 22 |
 | IEEE 123 node | 123 | 6 (13, 28, 47, 64, 91, 111) | 5 (48, 51, 67, 68, 69) | 22 | 88 |
 
-Node numbers follow the figure above (Fig. 4 of the paper).
+Node numbers follow Fig. 4 of the paper.
 
 
 ### Event Configurations
@@ -123,18 +123,18 @@ The complete code is coming soon.
 
 ## References
 
-[1] W. H. Kersting, "Radial distribution test feeders," *IEEE Trans. Power Syst.*, vol. 6, no. 3, pp. 975–985, 1991.
+<a id="ref1"></a>[1] W. H. Kersting, "Radial distribution test feeders," *IEEE Trans. Power Syst.*, vol. 6, no. 3, pp. 975–985, 1991.
 
-[2] S. Li, J. Lai, H. Li, W. Tang, Y. Xue, and H. Jiang, "CarbonGPT: Meta causal graph-enhanced large language models for carbon emission forecasting in large-scale power distribution networks," *IEEE Trans. Smart Grid*, vol. 17, no. 4, pp. 2797–2809, 2026.
+<a id="ref2"></a>[2] S. Li, J. Lai, H. Li, W. Tang, Y. Xue, and H. Jiang, "CarbonGPT: Meta causal graph-enhanced large language models for carbon emission forecasting in large-scale power distribution networks," *IEEE Trans. Smart Grid*, vol. 17, no. 4, pp. 2797–2809, 2026.
 
-[3] Y. Yuan, K. Dehghanpour, F. Bu, and Z. Wang, "Outage detection in partially observable distribution systems using smart meters and generative adversarial networks," *IEEE Trans. Smart Grid*, vol. 11, no. 6, pp. 5418–5430, 2020.
+<a id="ref3"></a>[3] Y. Yuan, K. Dehghanpour, F. Bu, and Z. Wang, "Outage detection in partially observable distribution systems using smart meters and generative adversarial networks," *IEEE Trans. Smart Grid*, vol. 11, no. 6, pp. 5418–5430, 2020.
 
-[4] C. Avraam, L. Ceferino, and Y. Dvorkin, "Operational and economy-wide impacts of compound cyber-attacks and extreme weather events on electric power networks," *Appl. Energy*, vol. 349, p. 121577, 2023.
+<a id="ref4"></a>[4] C. Avraam, L. Ceferino, and Y. Dvorkin, "Operational and economy-wide impacts of compound cyber-attacks and extreme weather events on electric power networks," *Appl. Energy*, vol. 349, p. 121577, 2023.
 
-[5] S. Bhattacharjee and S. K. Das, "Detection and forensics against stealthy data falsification in smart metering infrastructure," *IEEE Trans. Dependable Secure Comput.*, vol. 18, no. 1, pp. 356–371, 2021.
+<a id="ref5"></a>[5] S. Bhattacharjee and S. K. Das, "Detection and forensics against stealthy data falsification in smart metering infrastructure," *IEEE Trans. Dependable Secure Comput.*, vol. 18, no. 1, pp. 356–371, 2021.
 
-[6] A. Wang, W. Chang, S. Chen, and A. Mohaisen, "Delving into Internet DDoS attacks by botnets: Characterization and analysis," *IEEE/ACM Trans. Netw.*, vol. 26, no. 6, pp. 2843–2855, 2018.
+<a id="ref6"></a>[6] A. Wang, W. Chang, S. Chen, and A. Mohaisen, "Delving into Internet DDoS attacks by botnets: Characterization and analysis," *IEEE/ACM Trans. Netw.*, vol. 26, no. 6, pp. 2843–2855, 2018.
 
-[7] C. Muscas, M. Pau, P. A. Pegoraro, S. Sulis, F. Ponci, and A. Monti, "Multiarea distribution system state estimation," *IEEE Trans. Instrum. Meas.*, vol. 64, no. 5, pp. 1140–1148, 2015.
+<a id="ref7"></a>[7] C. Muscas, M. Pau, P. A. Pegoraro, S. Sulis, F. Ponci, and A. Monti, "Multiarea distribution system state estimation," *IEEE Trans. Instrum. Meas.*, vol. 64, no. 5, pp. 1140–1148, 2015.
 
-[8] X. Zhou, Z. Liu, Y. Guo, C. Zhao, J. Huang, and L. Chen, "Gradient-based multi-area distribution system state estimation," *IEEE Trans. Smart Grid*, vol. 11, no. 6, pp. 5325–5338, 2020.
+<a id="ref8"></a>[8] X. Zhou, Z. Liu, Y. Guo, C. Zhao, J. Huang, and L. Chen, "Gradient-based multi-area distribution system state estimation," *IEEE Trans. Smart Grid*, vol. 11, no. 6, pp. 5325–5338, 2020.
